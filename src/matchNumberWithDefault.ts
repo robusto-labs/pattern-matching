@@ -7,7 +7,7 @@ type NumberCaseHandlers<Output> = {
   _: (value: number) => Output;
 };
 
-const matchNumberWithDefault = <
+export const matchNumberWithDefault = <
   Output,
   Cases extends NumberCaseHandlers<Output>,
 >(
@@ -23,12 +23,3 @@ const matchNumberWithDefault = <
   }
   throw new Error(`No case handler for value: ${value}`);
 };
-
-// Exemple d'utilisation
-const result = matchNumberWithDefault(1, {
-  1: (value) => `One: ${value}`,
-  2: (value) => `Two: ${value}`,
-  _: (value) => 3,
-});
-
-console.log(result); // Output: One: 1

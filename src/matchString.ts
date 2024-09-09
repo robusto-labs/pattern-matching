@@ -5,13 +5,19 @@ type CaseHandlers<UnionType extends string, Output> = {
   [K in UnionType]: (value: K) => Output;
 };
 
+type IsLiteralUnion<T, BaseType extends T = T> = (
+  T extends any ? (arg: T) => void : never
+) extends (arg: BaseType) => void
+  ? false
+  : true;
+
 // Fonction pour matcher les chaînes de caractères
-const matchString = <
+export const matchString = <
   UnionType extends string,
   Cases extends CaseHandlers<UnionType, Output>,
   Output,
 >(
-  value: UnionType,
+  value: IsLiteralUnion<UnionType> extends true ? UnionType : never,
   cases: Cases,
 ): ExtractOutput<Cases, Output> => {
   if (value in cases) {
@@ -22,10 +28,13 @@ const matchString = <
 };
 
 // Exemple d'utilisation
-const result = matchString("matt" as "matt" | "louis" | "dd", {
-  matt: (value) => `Hello, ${value}!`,
-  louis: (value) => `Hi, ${value}!`,
-  dd: (value) => 3,
+const res = matchString("a" as "a" | "b", {
+  a: (value) => {
+    console.log(value);
+    return "ok";
+  },
+  b: (value) => {
+    console.log(value);
+    return 3;
+  },
 });
-
-console.log(result); // Output: Hello, matt!

@@ -69,7 +69,7 @@ interface Discrim {
   __kind: string;
 }
 
-const useMakeMatchDiscrim =
+export const useMakeMatchDiscrim =
   <Union extends object>(union: Union) =>
   <
     Tag extends keyof Union & "__kind",

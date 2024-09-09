@@ -8,16 +8,16 @@ type BooleanCaseHandlers<Output> = {
 };
 
 // Fonction pour matcher les valeurs booléennes
-function matchBoolean<Output, Cases extends BooleanCaseHandlers<Output>>(
+export function matchBoolean<Output, Cases extends BooleanCaseHandlers<Output>>(
   value: boolean,
   cases: Cases,
 ): ExtractOutput<Cases, Output>;
 
-function matchBoolean<Output, Cases extends BooleanCaseHandlers<Output>>(
+export function matchBoolean<Output, Cases extends BooleanCaseHandlers<Output>>(
   cases: Cases,
 ): (value: boolean) => ExtractOutput<Cases, Output>;
 
-function matchBoolean<Output, Cases extends BooleanCaseHandlers<Output>>(
+export function matchBoolean<Output, Cases extends BooleanCaseHandlers<Output>>(
   valueOrCases: boolean | BooleanCaseHandlers<Output>,
   cases?: Cases,
 ):
@@ -48,12 +48,3 @@ function matchBoolean<Output, Cases extends BooleanCaseHandlers<Output>>(
   }
   throw new Error("Invalid arguments");
 }
-
-const matchBooleanCurried = matchBoolean({
-  true: (value) => `It's true!`,
-  false: (value) => 3,
-});
-
-const result2 = matchBooleanCurried(false);
-
-console.log(result2); // Output: 3

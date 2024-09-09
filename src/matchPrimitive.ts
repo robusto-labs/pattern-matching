@@ -84,7 +84,7 @@ export type ExtractOutput<
   ? ValidateOutput<ReturnType<Cases[keyof Cases]>>
   : Output;
 
-export const matchPrimType = <
+export const matchPrimitive = <
   UnionType extends TUnionType,
   MatchType extends TMatchType<UnionType, Output>,
   Output,

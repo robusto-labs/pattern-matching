@@ -7,7 +7,10 @@ type CaseHandlers<Output> = {
   _: (value: string) => Output;
 };
 
-const matchStringWithDefault = <Output, Cases extends CaseHandlers<Output>>(
+export const matchStringWithDefault = <
+  Output,
+  Cases extends CaseHandlers<Output>,
+>(
   value: string,
   cases: Cases,
 ): ExtractOutput<Cases, Output> => {
@@ -20,11 +23,3 @@ const matchStringWithDefault = <Output, Cases extends CaseHandlers<Output>>(
   }
   throw new Error(`No case handler for value: ${value}`);
 };
-
-// Exemple d'utilisation
-const result = matchStringWithDefault("matt", {
-  matt: (value) => `Hello, ${value}!`,
-  _: (value) => 3,
-});
-
-console.log(result); // Output: Hello, matt!

@@ -46,6 +46,7 @@
   "include": [
     "src/**/*.ts",
     "eslint.config.js",
-    "rollup.config.js"
+    "rollup.config.js",
+    "test"
   ]
 }
