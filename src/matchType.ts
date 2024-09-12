@@ -69,23 +69,23 @@ export interface Discrim {
   __kind: string;
 }
 
-export const useMakeMatchDiscrim =
-  <Union extends object>(union: Union) =>
-  <
-    Tag extends keyof Union & "__kind",
-    Output,
-    Cases extends ExhaustiveTag<Union, Tag, unknown> = ExhaustiveTag<
-      Union,
-      Tag,
-      unknown
-    >,
-  >(
-    cases: MatchCases<
-      ValidateKeys<Cases, ExhaustiveTag<Union, Tag, unknown>>,
-      ExhaustiveTag<Union, Tag, Output>,
-      Output
-    >,
-  ): ExtractOutput<Cases, Output> => {
-    //@ts-ignore
-    return exhaustive.tag(union, "__kind", cases);
-  };
+export const matchType = <
+  Union extends object,
+  Tag extends keyof Union & "__kind",
+  Output,
+  Cases extends ExhaustiveTag<Union, Tag, unknown> = ExhaustiveTag<
+    Union,
+    Tag,
+    unknown
+  >,
+>(
+  union: Union,
+  cases: MatchCases<
+    ValidateKeys<Cases, ExhaustiveTag<Union, Tag, unknown>>,
+    ExhaustiveTag<Union, Tag, Output>,
+    Output
+  >,
+): ExtractOutput<Cases, Output> => {
+  //@ts-ignore
+  return exhaustive.tag(union, "__kind", cases);
+};

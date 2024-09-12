@@ -107,6 +107,12 @@ export const matchPrimitive = <
   } else if (G.isObject(value)) {
     //@ts-expect-error
     return match.object(value as Record<string, any>);
+  } else if (value === null) {
+    //@ts-expect-error
+    return match.null(value);
+  } else if (value === undefined) {
+    //@ts-expect-error
+    return match.undefined(value);
   }
   throw new Error("Type not supported");
 };

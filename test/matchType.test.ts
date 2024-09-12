@@ -1,4 +1,4 @@
-import { Discrim, useMakeMatchDiscrim } from "../src";
+import { Discrim, matchType } from "../src";
 
 class Cat implements Discrim {
   __kind = "Cat" as const;
@@ -12,9 +12,7 @@ class Dog implements Discrim {
 
 const dog = new Dog("Rex") as Dog | Cat;
 
-const matchAnimal = useMakeMatchDiscrim(dog);
-
-const resMatchAnimal = matchAnimal({
+const resMatchAnimal = matchType(dog, {
   Dog: (value) => {
     return 3;
   },

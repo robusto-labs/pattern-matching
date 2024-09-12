@@ -1,44 +1,31 @@
 
 # Pattern Matching Library for TypeScript
 
-🚀 TypeScript library for performing pattern matching like a real functional programming language.
-
-I strive to create the best experience for developers. I hope you enjoy 😊
+A robust TypeScript library for performing pattern matching on primitive types (`boolean`, `number`, `string`), as well as arrays and objects. This library helps create clean, type-safe conditional logic in TypeScript projects.
 
 ## Features
 
-- **`matchBoolean`**: Match exactly on union of boolean (NO DEFAULT CASE)
-- **`matchNumber`**: Match exactly on union type of number (NO DEFAULT CASE)
-- **`matchNumberWithDefault`**: Match any number with a default case.
-- **`matchString`**: Match exactly on union of string (NO DEFAULT CASE)
-- **`matchStringWithDefault`**: Match any string with a default case.
-- **`matchPrimitive`**: Match exactly on union of primitive (NO DEFAULT CASE)
-- **`matchType`**: Match exactly on union of class/object with a __kind key (NO DEFAULT CASE)
-
-## Prerequisites
-
-Ensure you have `pnpm` installed. You can install it globally using npm:
-
-```bash
-npm install -g pnpm
-```
+- **`matchBoolean`**: Match boolean values (`true`/`false`).
+- **`matchNumber`**: Match numbers using literal types.
+- **`matchNumberWithDefault`**: Match numbers with a default case.
+- **`matchString`**: Match string literal types.
+- **`matchStringWithDefault`**: Match strings with a default case.
+- **`matchPrimitive`**: Match various primitive types (`string`, `number`, `boolean`, `array`, `object`).
+- **`matchType`**: Exhaustive matching for discriminated unions using a `__kind` field.
 
 ## Installation
 
 To install the library via npm, run the following command:
 
 ```bash
-pnpm install 
-```
-## To build and run
-```bash
-pnpm build:dev
+npm install <your-library-name>
 ```
 
-```bash
-pnpm start:dev
-```
+Or, if you are using Yarn:
 
+```bash
+yarn add <your-library-name>
+```
 
 ## Usage
 
@@ -62,6 +49,7 @@ console.log(matcher); // Output: "It is true"
 Use `matchNumber` to match number literals. This function expects literal types for each number case.
 
 ```typescript
+import { matchNumber } from '<your-library-name>';
 
 const matcher = matchNumber(2 as 1 | 2 | 3, {
   1: () => "One",
@@ -77,6 +65,7 @@ console.log(matcher); // Output: "Two"
 The `matchNumberWithDefault` function allows you to provide a default case when no specific number case is matched.
 
 ```typescript
+import { matchNumberWithDefault } from '<your-library-name>';
 
 const matcher = matchNumberWithDefault(5, {
   1: () => "One",
@@ -92,6 +81,7 @@ console.log(matcher); // Output: "Default case"
 The `matchString` function allows you to match string literals.
 
 ```typescript
+import { matchString } from '<your-library-name>';
 
 const matcher = matchString("hello" as "hello" | "bye", {
   hello: () => "Hello World",
@@ -106,6 +96,7 @@ console.log(matcher); // Output: "Hello World"
 The `matchStringWithDefault` function lets you specify a default behavior when no string case is matched.
 
 ```typescript
+import { matchStringWithDefault } from '<your-library-name>';
 
 const matcher = matchStringWithDefault("unknown", {
   hello: () => "Hello World",
@@ -120,6 +111,7 @@ console.log(matcher); // Output: "Default case"
 The `matchPrimitive` function supports matching on multiple primitive types like `string`, `number`, `boolean`, `array`, and `object`.
 
 ```typescript
+import { matchPrimitive } from '<your-library-name>';
 
 const matcher = matchPrimitive("hello" as string | number, {
   string: (value) => `String: ${value}`,
@@ -134,6 +126,7 @@ console.log(matcher); // Output: "String: hello"
 The `matchType` function allows exhaustive pattern matching on discriminated unions. It uses the `__kind` field to differentiate between cases.
 
 ```typescript
+import { Discrim, matchType } from '<your-library-name>';
 
 class Cat implements Discrim {
   __kind = "Cat" as const;
@@ -161,9 +154,8 @@ console.log(resMatchAnimal); // Output: 3
 
 ## Contributing
 
-Contributions are welcome! If you find a bug or have suggestions for improvements, feel free to open an issue or submit a pull request on the [GitHub repository](https://github.com/robusto-labs).
+Contributions are welcome! If you find a bug or have suggestions for improvements, feel free to open an issue or submit a pull request on the [GitHub repository](https://github.com/mattaiod/robusto-labs).
 
 ## License
 
 This library is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
-
