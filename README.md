@@ -42,6 +42,37 @@ pnpm start:dev
 
 ## Usage
 
+
+### `matchType`
+
+The `matchType` function allows exhaustive pattern matching on discriminated unions. It uses the `__kind` field to differentiate between cases.
+
+```typescript
+
+class Cat implements Discrim {
+  __kind = "Cat" as const;
+  constructor(public nameCat: string) {}
+}
+
+class Dog implements Discrim {
+  __kind = "Dog" as const;
+  constructor(public nameDog: string) {}
+}
+
+const dog = new Dog("Rex") as Dog | Cat;
+
+const resMatchAnimal = matchType(dog, {
+  Dog: (value) => {
+    return 3;
+  },
+  Cat: (value) => {
+    return value.nameCat;
+  },
+});
+
+console.log(resMatchAnimal); // Output: 3
+```
+
 ### `matchBoolean`
 
 The `matchBoolean` function allows you to match boolean values (`true` or `false`). You can pass both the value and the cases together or create a curried version.
@@ -127,36 +158,6 @@ const matcher = matchPrimitive("hello" as string | number, {
 });
 
 console.log(matcher); // Output: "String: hello"
-```
-
-### `matchType`
-
-The `matchType` function allows exhaustive pattern matching on discriminated unions. It uses the `__kind` field to differentiate between cases.
-
-```typescript
-
-class Cat implements Discrim {
-  __kind = "Cat" as const;
-  constructor(public nameCat: string) {}
-}
-
-class Dog implements Discrim {
-  __kind = "Dog" as const;
-  constructor(public nameDog: string) {}
-}
-
-const dog = new Dog("Rex") as Dog | Cat;
-
-const resMatchAnimal = matchType(dog, {
-  Dog: (value) => {
-    return 3;
-  },
-  Cat: (value) => {
-    return value.nameCat;
-  },
-});
-
-console.log(resMatchAnimal); // Output: 3
 ```
 
 ## Contributing
