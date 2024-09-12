@@ -5,12 +5,6 @@ type NumberCaseHandlers<UnionType extends number, Output> = {
   [K in UnionType]: (value: K) => Output;
 };
 
-type IsLiteralUnion<T, BaseType extends T = T> = (
-  T extends any ? (arg: T) => void : never
-) extends (arg: BaseType) => void
-  ? false
-  : true;
-
 // Fonction pour matcher les nombres
 export const matchNumber = <
   UnionType extends number,
@@ -26,14 +20,3 @@ export const matchNumber = <
   }
   throw new Error(`No case handler for value: ${value}`);
 };
-
-const res = matchNumber(1 as 1 | 2, {
-  "1": (value) => {
-    console.log(value);
-    return "ok";
-  },
-  "2": (value) => {
-    console.log(value);
-    return 3;
-  },
-});

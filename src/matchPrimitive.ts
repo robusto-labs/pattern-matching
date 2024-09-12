@@ -89,7 +89,7 @@ export const matchPrimitive = <
   MatchType extends TMatchType<UnionType, Output>,
   Output,
 >(
-  value: UnionType,
+  value: IsLiteralUnion<UnionType> extends true ? UnionType : never,
   match: MatchType,
 ): ExtractOutput<MatchType, Output> => {
   if (typeof value === "string") {

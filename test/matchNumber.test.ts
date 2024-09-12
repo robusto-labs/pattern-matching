@@ -12,7 +12,7 @@ describe("matchNumber", () => {
 
   it("should throw an error for unmatched number", () => {
     expect(() =>
-      matchNumber(5 as number, {
+      matchNumber(1 as 1 | 2, {
         1: () => "One",
         2: () => "Two",
       }),

@@ -2,7 +2,7 @@ import { matchString } from "../src/matchString";
 
 describe("matchString", () => {
   it("should match specific string case", () => {
-    const result = matchString("hello", {
+    const result = matchString("hello" as "hello" | "bye", {
       hello: () => "Hello World",
       bye: () => "Goodbye",
     });
@@ -11,8 +11,9 @@ describe("matchString", () => {
 
   it("should throw an error for unmatched string", () => {
     expect(() =>
-      matchString("unknown", {
-        hello: () => "Hello World",
+      matchString("unknown" as "unknown" | "fdf", {
+        fdf: () => "FDF",
+        unknown: () => "Unknown",
       }),
     ).toThrow("No case handler for value: unknown");
   });

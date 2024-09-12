@@ -1,4 +1,4 @@
-import { ExtractOutput, ValidateOutput } from "./matchPrimitive";
+import { ExtractOutput } from "./matchPrimitive";
 
 // Définir un type utilitaire pour les cas
 type NumberCaseHandlers<Output> = {
